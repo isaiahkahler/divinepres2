@@ -1,10 +1,12 @@
 import { Presentation } from "./types";
 
+const storageKey = 'presentations';
+
 /**
  * Store new presentation
  */
 export function Store(presentation: Presentation) {
-    const past = window.localStorage.getItem('presentations');
+    const past = window.localStorage.getItem(storageKey);
 
     if(!!past){ // if past presentations stored
         // unpack past presentations
@@ -21,18 +23,18 @@ export function Store(presentation: Presentation) {
             console.error("Could not store new presentation.");
         }
         // repack and store
-        localStorage.setItem('presentations', JSON.stringify(presentationList));
+        localStorage.setItem(storageKey, JSON.stringify(presentationList));
     } else { 
         // if no past presentations stored
-        localStorage.setItem('presentations', JSON.stringify([presentation]));
+        localStorage.setItem(storageKey, JSON.stringify([presentation]));
     }
 }
 
 /**
  * @returns List of stored presentations.
  */
-export function getStored(){
-    const data = localStorage.getItem('presentations');
+export function getStored():Presentation[]{
+    const data = localStorage.getItem(storageKey);
     if(!!data) {
         const parsedData = JSON.parse(data);
         if(Array.isArray(parsedData)){
