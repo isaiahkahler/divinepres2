@@ -3,10 +3,11 @@ export interface Presentation {
     timestamp: number,
 }
 
+export type Template = Section[];
+
 export type Section = Song | Reading | Plain | Cover;
 
 export interface PresentationSection {
-    eventTitle: string | null,
     title: string,
 }
 
@@ -19,8 +20,8 @@ export interface Song extends PresentationSection {
 
 export interface Reading extends PresentationSection {
     passage: string | null,
-    page: string,
-    content: any,
+    page: string | null,
+    content: any | null,
     type: 'reading'
 }
 
