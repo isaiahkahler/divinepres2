@@ -1,9 +1,9 @@
-import React from 'react';
-import { IconProps } from '@material-ui/core/Icon';
+import React, { PropsWithChildren } from 'react';
+import Icon, { IconProps } from '@material-ui/core/Icon';
 import ButtonBase, { ButtonBaseProps } from '@material-ui/core/ButtonBase';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import { styled } from '@material-ui/core/styles';
+import { styled, useTheme } from '@material-ui/core/styles';
 import { Theme } from '@material-ui/core';
 
 interface FullButtonProps {
@@ -11,12 +11,27 @@ interface FullButtonProps {
     isSecondary?: boolean,
 }
 
-const FullButton = styled(({ icon, ...props }: FullButtonProps & Omit<ButtonBaseProps, keyof FullButtonProps>) => {
-    let Icon = icon;
-    return (
-        <ButtonBase {...{ ...props }}>
+export default function FullButton({icon, isSecondary, ...props}: PropsWithChildren<FullButtonProps> & Omit<ButtonBaseProps, keyof PropsWithChildren<FullButtonProps>>) {
+    const Icon = icon;
+    const theme = useTheme();
+
+    return(
+        <ButtonBase style={{
+            width: '100%',
+            borderRadius: '1000px',
+            padding: theme.spacing(2),
+            boxShadow: theme.shadows[5],
+            color: theme.palette.text.primary,
+            marginTop: theme.spacing(1),
+            marginBottom: theme.spacing(1),
+            backgroundColor: !!isSecondary ? theme.palette.secondary.light : theme.palette.primary.light,
+        }}
+        
+        {...{...props}}
+
+        >
             <Grid container alignItems='center'>
-                {!!Icon ? <Grid item><Icon fontSize='large' /></Grid> : undefined}
+                {!!Icon ? <Grid item><Icon fontSize='large' style={{paddingRight: theme.spacing(2)}} /></Grid> : undefined}
                 <Grid item xs>
                     <Typography variant='h4'>
                         {props.children}
@@ -25,16 +40,4 @@ const FullButton = styled(({ icon, ...props }: FullButtonProps & Omit<ButtonBase
             </Grid>
         </ButtonBase>
     );
-})((props: { theme: Theme }) => ({
-    width: '100%',
-    borderRadius: '1000px',
-    padding: props.theme.spacing(2),
-    boxShadow: props.theme.shadows[5],
-    color: props.theme.palette.text.primary,
-    marginTop: props.theme.spacing(1),
-    marginBottom: props.theme.spacing(1),
-    //@ts-ignore
-    backgroundColor: !!props.isSecondary ? props.theme.palette.secondary.light : props.theme.palette.primary.light,
-}));
-
-export default FullButton;
+}
