@@ -5,7 +5,7 @@ const storageKey = 'presentations';
 /**
  * Store new presentation
  */
-export function Store(presentation: Presentation) {
+export function store(presentation: Presentation) {
     const past = window.localStorage.getItem(storageKey);
 
     if(!!past){ // if past presentations stored
