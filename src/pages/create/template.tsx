@@ -18,7 +18,7 @@ export default function Create(props: CreateProps) {
         <Container maxWidth='md'>
             <Grid container justify='center' direction='column'>
                 <Typography variant='h1'><Box fontWeight='fontWeightBold' fontStyle='italic' textAlign='center'>DivinePres 2</Box></Typography>
-                <Typography variant='h3'>choose a template.</Typography>
+                <Typography variant='h3'>choose a template:</Typography>
                 <FullButton onClick={() => {props.handleChooseTemplate(templateTMBC)}}>TMBC</FullButton>
                 <FullButton isSecondary onClick={() => {props.handleChooseTemplate([])}}>blank</FullButton>
 

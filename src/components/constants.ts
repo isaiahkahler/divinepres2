@@ -16,9 +16,10 @@ const templateTMBCCover:Cover = {
 
 const templateTMBCSong:Song = {
     backgroundImage: null,
-    lyrics: [],
+    lyrics: null,
     number: null,
     title: 'Hymn - ',
+    songTitle: '',
     type: 'song'
 };
 

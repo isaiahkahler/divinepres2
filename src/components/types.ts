@@ -12,8 +12,9 @@ export interface PresentationSection {
 }
 
 export interface Song extends PresentationSection {
+    songTitle: string,
     number: string | null,
-    lyrics: string[],
+    lyrics: string | null,
     backgroundImage: string | null,
     type: 'song'
 }
