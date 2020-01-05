@@ -16,7 +16,9 @@ export default function FullButton({icon, isSecondary, ...props}: PropsWithChild
     const theme = useTheme();
 
     return(
-        <ButtonBase style={{
+        <ButtonBase 
+        {...{...props, style: {
+            backgroundColor: !!isSecondary ? theme.palette.secondary.light : theme.palette.primary.light,
             width: '100%',
             borderRadius: '1000px',
             padding: theme.spacing(2),
@@ -24,12 +26,8 @@ export default function FullButton({icon, isSecondary, ...props}: PropsWithChild
             color: theme.palette.text.primary,
             marginTop: theme.spacing(1),
             marginBottom: theme.spacing(1),
-            backgroundColor: !!isSecondary ? theme.palette.secondary.light : theme.palette.primary.light,
-        }}
-        
-        {...{...props}}
-
-        >
+            ...props.style,
+        }}}>
             <Grid container alignItems='center'>
                 {!!Icon ? <Grid item><Icon fontSize='large' style={{paddingRight: theme.spacing(2)}} /></Grid> : undefined}
                 <Grid item xs>
